@@ -3,18 +3,23 @@
 <head>
   <meta charset="utf-8">
   <title>Fênix – Documentação da API</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css">
+  <link rel="stylesheet" href="/docs/ui/swagger-ui.css">
 </head>
 <body>
   <div id="swagger-ui"></div>
-  <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+  <script src="/docs/ui/swagger-ui-bundle.js"></script>
   <script>
-    window.ui = SwaggerUIBundle({
-      url: '/docs/openapi.json',
-      dom_id: '#swagger-ui',
-      persistAuthorization: true,
-      tryItOutEnabled: true,
-    });
+    if (window.SwaggerUIBundle) {
+      window.ui = SwaggerUIBundle({
+        url: '/docs/openapi.json',
+        dom_id: '#swagger-ui',
+        persistAuthorization: true,
+      });
+    } else {
+      document.getElementById('swagger-ui').innerHTML =
+        '<p style="font-family:sans-serif;padding:2rem">Não foi possível carregar o Swagger UI. ' +
+        'O contrato da API está em <a href="/docs/openapi.json">/docs/openapi.json</a>.</p>';
+    }
   </script>
 </body>
 </html>
